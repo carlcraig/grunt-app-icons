@@ -1,6 +1,6 @@
 {
   "name": "grunt-app-icons",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Create App Icons: favicon, touch, android, ios",
   "homepage": "https://github.com/carlcraig/grunt-app-icons",
   "author": "Carl Craig <carlcraig@3c-studios.com>",
