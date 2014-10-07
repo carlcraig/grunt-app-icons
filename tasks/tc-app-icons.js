@@ -10,7 +10,7 @@ module.exports = function ( grunt ) {
     var im = require( 'imagemagick' );
 
     var options = this.options( {
-      type: [], // all, favicon, touchicon, ios, android
+      type: [], // all, favicon, touch, ios, android
       createDirectories: false,
       precomposed: true,
       precomposedString: '-precomposed'
@@ -48,21 +48,21 @@ module.exports = function ( grunt ) {
                   var remainingIcons = icons[type].length;
                   icons[type].forEach( function ( iconOptions ) {
                     var iconFolder = folder;
-                    if (options.createDirectories) {
+                    if ( options.createDirectories ) {
                       iconFolder += type + '/';
                     }
                     var iconName = iconOptions.name;
-                    if (options.precomposed) {
-                      iconName = iconName.replace(/%precomposed%/g, options.precomposedString);
+                    if ( options.precomposed ) {
+                      iconName = iconName.replace( /%precomposed%/g, options.precomposedString );
                     }
                     var args = [image].concat( iconOptions.args ).concat( [iconFolder + iconName] );
-                    im.convert( args, function ( error, stdout ) {
-                      if (error) {
-                        grunt.log.errorlns(error);
+                    im.convert( args, function ( error ) {
+                      if ( error ) {
+                        grunt.log.errorlns( error );
                       } else {
-                        grunt.log.writeln('Created: ' + iconName);
+                        grunt.log.writeln( 'Created: ' + iconName );
                       }
-                      if ( --remainingIcons <= 0) {
+                      if ( -- remainingIcons <= 0 ) {
                         if ( -- remainingTypes <= 0 ) {
                           if ( -- remaining <= 0 ) {
                             done();
@@ -84,7 +84,7 @@ module.exports = function ( grunt ) {
         } );
 
       } else {
-        grunt.log.error( 'No type option specified, allowed: all, favicon, touch, ico, ios, android' );
+        grunt.log.error( 'No type option specified, allowed: all, favicon, touch, ios, android' );
         if ( -- remaining <= 0 ) {
           done();
         }
@@ -147,16 +147,11 @@ module.exports = function ( grunt ) {
   };
 
   fs.mkdirParent = function ( dirPath, mode, callback ) {
-    //Call the standard fs.mkdir
     fs.mkdir( dirPath, mode, function ( error ) {
-      //When it fail in this way, do the custom steps
       if ( error && error.errno === 34 ) {
-        //Create all the parents recursively
         fs.mkdirParent( path.dirname( dirPath ), mode, callback );
-        //And then the directory
         fs.mkdirParent( dirPath, mode, callback );
       }
-      //Manually run the callback since we used our own callback to do all these
       callback && callback( error );
     } );
   };
