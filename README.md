@@ -1,11 +1,23 @@
 Grunt App Icons
 ===============
 
+Will create icons for your project.
+
+- Favicon
+- Touch Icons
+- iOS Icons
+- Android Icons
+
+
 Installation
 ------------
 
 ```sh
 npm install grunt-app-icons --save-dev
+```
+
+```js
+grunt.loadNpmTasks('grunt-app-icons');
 ```
 
 
