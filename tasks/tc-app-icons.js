@@ -119,6 +119,14 @@ module.exports = function ( grunt ) {
       {name: 'icon-xxhdpi.png', args: ['-resize', '144x144']},
       {name: 'icon-xxxhdpi.png', args: ['-resize', '192x192']}
     ],
+    androidDirectories: [
+      {name: 'drawable-ldpi/icon.png', args: ['-resize', '36x36']},
+      {name: 'drawable-mdpi/icon.png', args: ['-resize', '48x48']},
+      {name: 'drawable-hdpi/icon.png', args: ['-resize', '72x72']},
+      {name: 'drawable-xhdpi/icon.png', args: ['-resize', '96x96']},
+      {name: 'drawable-xxhdpi/icon.png', args: ['-resize', '144x144']},
+      {name: 'drawable-xxxhdpi/icon.png', args: ['-resize', '192x192']}
+    ],
     favicon: [
       {
         name: 'favicon.ico',
