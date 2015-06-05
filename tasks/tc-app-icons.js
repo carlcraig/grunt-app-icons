@@ -13,7 +13,8 @@ module.exports = function ( grunt ) {
       type: [], // all, favicon, touch, ios, android
       createDirectories: false,
       precomposed: true,
-      precomposedString: '-precomposed'
+      precomposedString: '-precomposed',
+      args: []
     } );
 
     var remaining = this.files.length;
@@ -55,7 +56,18 @@ module.exports = function ( grunt ) {
                     if ( options.precomposed ) {
                       iconName = iconName.replace( /%precomposed%/g, options.precomposedString );
                     }
-                    var args = [image].concat( iconOptions.args ).concat( [iconFolder + iconName] );
+                    var iconArgs = iconOptions.args || [];
+                    var taskArgs = options.args || [];
+                    if ( typeof taskArgs === 'function' ) {
+                      taskArgs = taskArgs( iconOptions.resize );
+                    }
+                    if ( iconOptions.resize ) {
+                      iconArgs = ['-resize', iconOptions.resize].concat( iconArgs );
+                      taskArgs = taskArgs.map( function( arg ) {
+                        return arg.replace( /%size%/g, iconOptions.resize );
+                      } );
+                    }
+                    var args = [image].concat( iconArgs ).concat( taskArgs ).concat( [iconFolder + iconName] );
                     im.convert( args, function ( error ) {
                       if ( error ) {
                         grunt.log.errorlns( error );
@@ -96,36 +108,36 @@ module.exports = function ( grunt ) {
 
   var icons = {
     ios: [
-      {name: 'icon-60.png', args: ['-resize', '60x60']},
-      {name: 'icon-60@2x.png', args: ['-resize', '120x120']},
-      {name: 'icon-76.png', args: ['-resize', '76x76']},
-      {name: 'icon-76@2x.png', args: ['-resize', '152x152']},
-      {name: 'icon-40.png', args: ['-resize', '40x40']},
-      {name: 'icon-40@2x.png', args: ['-resize', '80x80']},
-      {name: 'icon.png', args: ['-resize', '57x57']},
-      {name: 'icon@2x.png', args: ['-resize', '114x114']},
-      {name: 'icon-72.png', args: ['-resize', '72x72']},
-      {name: 'icon-72@2x.png', args: ['-resize', '144x144']},
-      {name: 'icon-small.png', args: ['-resize', '29x29']},
-      {name: 'icon-small@2x.png', args: ['-resize', '58x58']},
-      {name: 'icon-50.png', args: ['-resize', '50x50']},
-      {name: 'icon-50@2x.png', args: ['-resize', '100x100']}
+      {name: 'icon-60.png', resize: '60x60'},
+      {name: 'icon-60@2x.png', resize: '120x120'},
+      {name: 'icon-76.png', resize: '76x76'},
+      {name: 'icon-76@2x.png', resize: '152x152'},
+      {name: 'icon-40.png', resize: '40x40'},
+      {name: 'icon-40@2x.png', resize: '80x80'},
+      {name: 'icon.png', resize: '57x57'},
+      {name: 'icon@2x.png', resize: '114x114'},
+      {name: 'icon-72.png', resize: '72x72'},
+      {name: 'icon-72@2x.png', resize: '144x144'},
+      {name: 'icon-small.png', resize: '29x29'},
+      {name: 'icon-small@2x.png', resize: '58x58'},
+      {name: 'icon-50.png', resize: '50x50'},
+      {name: 'icon-50@2x.png', resize: '100x100'}
     ],
     android: [
-      {name: 'icon-ldpi.png', args: ['-resize', '36x36']},
-      {name: 'icon-mdpi.png', args: ['-resize', '48x48']},
-      {name: 'icon-hdpi.png', args: ['-resize', '72x72']},
-      {name: 'icon-xhdpi.png', args: ['-resize', '96x96']},
-      {name: 'icon-xxhdpi.png', args: ['-resize', '144x144']},
-      {name: 'icon-xxxhdpi.png', args: ['-resize', '192x192']}
+      {name: 'icon-ldpi.png', resize: '36x36'},
+      {name: 'icon-mdpi.png', resize: '48x48'},
+      {name: 'icon-hdpi.png', resize: '72x72'},
+      {name: 'icon-xhdpi.png', resize: '96x96'},
+      {name: 'icon-xxhdpi.png', resize: '144x144'},
+      {name: 'icon-xxxhdpi.png', resize: '192x192'}
     ],
     androidDirectories: [
-      {name: 'drawable-ldpi/icon.png', args: ['-resize', '36x36']},
-      {name: 'drawable-mdpi/icon.png', args: ['-resize', '48x48']},
-      {name: 'drawable-hdpi/icon.png', args: ['-resize', '72x72']},
-      {name: 'drawable-xhdpi/icon.png', args: ['-resize', '96x96']},
-      {name: 'drawable-xxhdpi/icon.png', args: ['-resize', '144x144']},
-      {name: 'drawable-xxxhdpi/icon.png', args: ['-resize', '192x192']}
+      {name: 'drawable-ldpi/icon.png', resize: '36x36'},
+      {name: 'drawable-mdpi/icon.png', resize: '48x48'},
+      {name: 'drawable-hdpi/icon.png', resize: '72x72'},
+      {name: 'drawable-xhdpi/icon.png', resize: '96x96'},
+      {name: 'drawable-xxhdpi/icon.png', resize: '144x144'},
+      {name: 'drawable-xxxhdpi/icon.png', resize: '192x192'}
     ],
     favicon: [
       {
@@ -144,13 +156,13 @@ module.exports = function ( grunt ) {
       }
     ],
     touch: [
-      {name: 'apple-touch-icon%precomposed%.png', args: ['-resize', '57x57']},
-      {name: 'apple-touch-icon-76x76%precomposed%.png', args: ['-resize', '76x76']},
-      {name: 'apple-touch-icon-120x120%precomposed%.png', args: ['-resize', '120x120']},
-      {name: 'apple-touch-icon-152x152%precomposed%.png', args: ['-resize', '152x152']},
-      {name: 'apple-touch-icon-180x180%precomposed%.png', args: ['-resize', '180x180']},
-      {name: 'touch-icon-128x128.png', args: ['-resize', '128x128']},
-      {name: 'touch-icon-192x192.png', args: ['-resize', '192x192']}
+      {name: 'apple-touch-icon%precomposed%.png', resize: '57x57'},
+      {name: 'apple-touch-icon-76x76%precomposed%.png', resize: '76x76'},
+      {name: 'apple-touch-icon-120x120%precomposed%.png', resize: '120x120'},
+      {name: 'apple-touch-icon-152x152%precomposed%.png', resize: '152x152'},
+      {name: 'apple-touch-icon-180x180%precomposed%.png', resize: '180x180'},
+      {name: 'touch-icon-128x128.png', resize: '128x128'},
+      {name: 'touch-icon-192x192.png', resize: '192x192'}
     ]
   };
 
