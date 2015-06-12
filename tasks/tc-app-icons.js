@@ -3,6 +3,7 @@ module.exports = function ( grunt ) {
 
   var fs = require( 'fs' );
   var path = require( 'path' );
+  var mkdirp = require( 'mkdirp' );
 
   grunt.registerMultiTask( 'appIcons', 'create app icons', function () {
 
@@ -26,6 +27,11 @@ module.exports = function ( grunt ) {
         var image = file.src[0];
         var folder = path.dirname( file.dest ) + '/' + path.basename( file.dest ) + '/';
         var folders = [folder];
+
+        // Create path folders, if needed
+        mkdirp(path.dirname( file.dest ), function ( error ) {
+          grunt.log.error( error );
+        });
 
         if ( options.type.indexOf( 'all' ) >= 0 ) {
           options.type = ['favicon', 'touch', 'ios', 'android']

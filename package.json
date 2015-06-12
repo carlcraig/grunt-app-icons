@@ -8,7 +8,8 @@
     "grunt": "~0.4.0"
   },
   "dependencies": {
-    "imagemagick": "0.1.x"
+    "imagemagick": "0.1.x",
+    "mkdirp": "^0.5.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
