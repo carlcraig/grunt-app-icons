@@ -124,8 +124,8 @@ module.exports = function ( grunt ) {
       {name: 'Icon-Small.png', resize: '29x29'},
       {name: 'Icon-Small@2x.png', resize: '58x58'},
       {name: 'Icon-Small@3x.png', resize: '87x87'},
-      
-      // iOS 6 only
+    ],
+    ios6: [
       {name: 'Icon.png', resize: '57x57'},
       {name: 'Icon@2x.png', resize: '114x114'},
       {name: 'Icon-72.png', resize: '72x72'},

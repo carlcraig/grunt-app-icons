@@ -39,11 +39,13 @@ appIcons: {
     src: 'src/icon/app-icon.png',
     dest: 'www/',
     options: {
-      type: ['touch', 'favicon'] // android, ios
+      type: ['touch', 'favicon'] // android, ios, ios6
     }
   }
 }
 ```
+
+Note that the `ios` type no longer includes icons that are required only for iOS 6 and earlier. For apps that support earlier versions of iOS, be sure to include both the `ios` and `ios6` types, otherwise icons will only be generated for iOS 7 and newer.
 
 
 Advanced Configuration
@@ -58,7 +60,7 @@ appIcons: {
     dest: 'src/icon/',
     options: {
       createDirectories: true,
-      type: ['ios', 'android'],
+      type: ['ios', 'ios6', 'android'],
       args: [
         '-background', 'none',
         '-size', '120x120',
