@@ -29,9 +29,7 @@ module.exports = function ( grunt ) {
         var folders = [folder];
 
         // Create path folders, if needed
-        mkdirp(path.dirname( file.dest ), function ( error ) {
-          grunt.log.error( error );
-        });
+        mkdirp.sync(path.dirname( file.dest ));
 
         if ( options.type.indexOf( 'all' ) >= 0 ) {
           options.type = ['favicon', 'touch', 'ios', 'android']
