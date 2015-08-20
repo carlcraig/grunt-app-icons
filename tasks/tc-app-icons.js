@@ -146,6 +146,17 @@ module.exports = function ( grunt ) {
       {name: 'drawable-xxhdpi/icon.png', resize: '144x144'},
       {name: 'drawable-xxxhdpi/icon.png', resize: '192x192'}
     ],
+    iosStore: [
+      {name: 'iTunesArtwork.png', resize: '512x512'},
+      {name: 'iTunesArtwork@2x.png', resize: '1024x1024'}
+    ],
+    playStore: [
+      {name: 'icon-google-play.png', resize: '512x512'}
+    ],
+    amazonStore: [
+      {name: 'icon-amazon-small.png', resize: '114x114'},
+      {name: 'icon-amazon-large.png', resize: '512x512'}
+    ],
     favicon: [
       {
         name: 'favicon.ico',
