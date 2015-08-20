@@ -34,7 +34,7 @@ module.exports = function ( grunt ) {
         });
 
         if ( options.type.indexOf( 'all' ) >= 0 ) {
-          options.type = ['favicon', 'touch', 'ios', 'android']
+          options.type = ['favicon', 'touch', 'ios', 'ios6', 'android']
         }
 
         if ( options.createDirectories ) {
@@ -114,21 +114,24 @@ module.exports = function ( grunt ) {
 
   var icons = {
     ios: [
-      {name: 'icon-60.png', resize: '60x60'},
-      {name: 'icon-60@2x.png', resize: '120x120'},
-      {name: 'icon-60@3x.png', resize: '180x180'},
-      {name: 'icon-76.png', resize: '76x76'},
-      {name: 'icon-76@2x.png', resize: '152x152'},
-      {name: 'icon-40.png', resize: '40x40'},
-      {name: 'icon-40@2x.png', resize: '80x80'},
-      {name: 'icon.png', resize: '57x57'},
-      {name: 'icon@2x.png', resize: '114x114'},
-      {name: 'icon-72.png', resize: '72x72'},
-      {name: 'icon-72@2x.png', resize: '144x144'},
-      {name: 'icon-small.png', resize: '29x29'},
-      {name: 'icon-small@2x.png', resize: '58x58'},
-      {name: 'icon-50.png', resize: '50x50'},
-      {name: 'icon-50@2x.png', resize: '100x100'}
+      {name: 'Icon-60@2x.png', resize: '120x120'},
+      {name: 'Icon-60@3x.png', resize: '180x180'},
+      {name: 'Icon-76.png', resize: '76x76'},
+      {name: 'Icon-76@2x.png', resize: '152x152'},
+      {name: 'Icon-Small-40.png', resize: '40x40'},
+      {name: 'Icon-Small-40@2x.png', resize: '80x80'},
+      {name: 'Icon-Small-40@3x.png', resize: '120x120'},
+      {name: 'Icon-Small.png', resize: '29x29'},
+      {name: 'Icon-Small@2x.png', resize: '58x58'},
+      {name: 'Icon-Small@3x.png', resize: '87x87'},
+    ],
+    ios6: [
+      {name: 'Icon.png', resize: '57x57'},
+      {name: 'Icon@2x.png', resize: '114x114'},
+      {name: 'Icon-72.png', resize: '72x72'},
+      {name: 'Icon-72@2x.png', resize: '144x144'},
+      {name: 'Icon-Small-50.png', resize: '50x50'},
+      {name: 'Icon-Small-50@2x.png', resize: '100x100'}
     ],
     android: [
       {name: 'icon-ldpi.png', resize: '36x36'},
