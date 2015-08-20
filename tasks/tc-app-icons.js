@@ -34,7 +34,7 @@ module.exports = function ( grunt ) {
         });
 
         if ( options.type.indexOf( 'all' ) >= 0 ) {
-          options.type = ['favicon', 'touch', 'ios', 'android']
+          options.type = ['favicon', 'touch', 'ios', 'ios6', 'android']
         }
 
         if ( options.createDirectories ) {
